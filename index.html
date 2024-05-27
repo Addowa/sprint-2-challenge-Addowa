@@ -5,23 +5,65 @@
   <title>Web Sprint 2 Challenge</title>
   <script id="challenge">
     // 👉 CHALLENGE 1
-    function profileActivation(profile, reason) {
-
+    function profileActivation(profile, reason) { 
+      if (profile.active && !reason) {
+        return "confirm status manually"
+      } 
+      if (profile.active) {
+        profile.active = false
+        profile.reason = reason
+      } else {
+        profile.active = true
+        delete profile.reason
+      }
+      return profile
     }
-
+    
     // 👉 CHALLENGE 2
     function mineSweeper(grid, x, y) {
-
+      if (x < 1 || x > 3 || y < 1 || y > 3) {
+        return "invalid coordinates";
+      } 
+      const newX = x - 1;
+      const newY = y - 1;
+      if (grid[newY][newX] === "🟥") {
+          return "🟥 💀";
+      } else if (grid[newY][newX] === "🟦") {
+         return "🟦 🥳";
+      }
     }
 
     // 👉 CHALLENGE 3
     function booleanize(obj) {
-
+      for (let prop in obj) {
+        if (prop.length > 9) {
+          return "shorten all prop names to 9 chars or less"
+        } else if (obj[prop] === 0) {
+            obj[prop] = false;
+        } else if (obj[prop] === 1) {
+          obj[prop] = true;
+        } else if (obj[prop] === null){
+          delete obj[prop]
+        }
+      }
+      return obj
     }
 
     // 👉 CHALLENGE 4
     function scrub(text, forbidden) {
-
+      if (!text || !forbidden) {
+        return text
+      }
+      let arr = [];
+      let word = text.split(' ')
+      for (let i = 0; i < word.length; i++) {
+        if (forbidden.indexOf(word[i]) !== -1) {
+         arr.push('x'.repeat(word[i].length));
+        } else {
+          arr.push(word[i]);
+        }
+      }
+      return arr.join(' ')
     }
 
     // 👉 CHALLENGE 5 (bonus, NOT graded)
